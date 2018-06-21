@@ -1,0 +1,21 @@
+<style>
+span {
+  font-weight: bold;
+}
+</style>
+<video controls></video>
+<div>Video's network state is: <span id="networkState"></span></div>
+<div>That means this build is: <span id="isWorking"></span></div>
+<script>
+const video = document.querySelector('video');
+const networkStateSpan = document.querySelector('#networkState');
+const isWorkingSpan = document.querySelector('#isWorking');
+video.src = URL.createObjectURL(new MediaSource());
+
+setInterval(updateNetworkState, 500);
+
+function updateNetworkState() {
+  networkStateSpan.innerHTML = video.networkState;
+  isWorkingSpan.innerHTML = (video.networkState === video.NETWORK_LOADING) ? 'broken' : 'working';
+}
+</script>
